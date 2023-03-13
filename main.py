@@ -15,19 +15,18 @@ link = post.link
 
 rss_striped_link = link[:-1] + ".rss"
 
-feed2 = feedparser.parse(rss_striped_link)
+feed2 = feedparser.parse(rss_striped_link) #parse the feed from the individual link selected
+content = feed2.entries[0].content[0].value #extract content for first entry
 
-for post in feed2.entries:
-    html = post.description
-    soup = BeautifulSoup(html, "html.parser")
-    try:
-        first_p = soup.find("p").text.strip()
-        end_p = first_p.find("</p>")
-        first_paragraph = BeautifulSoup(first_p[:end_p], "html.parser").text.strip()
-    except:
-        print("Couldnt find description")
+soup = BeautifulSoup(content, "html.parser")
+p_tags = soup.find_all("p")
+if p_tags:
+    first_p_tag = p_tags[0]
+    content_text = first_p_tag.get_text()
+else:
+    print("N/A (probably because there was only an image)")
 
 # Print the results
 print("Title:", title)
-print("Description:", first_paragraph)
+print("Description:", content_text)
 print("Link:", link)
