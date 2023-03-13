@@ -1,0 +1,14 @@
+# Ignore virtual environment
+myenv/
+
+# Ignore compiled Python files
+*.pyc
+
+# Ignore build and distribution directories
+build/
+dist/
+__pycache__/
+
+# Ignore sensitive configuration files
+config.ini
+secrets.py
