@@ -1,6 +1,7 @@
 import feedparser
 import random
 from bs4 import BeautifulSoup
+import pyshorteners
 
 def get_conspiracy_post():
     # Parse the RSS feed
@@ -15,6 +16,9 @@ def get_conspiracy_post():
     link = post.link
 
     rss_striped_link = link[:-1] + ".rss"
+
+    s = pyshorteners.Shortener()
+    short_url = s.tinyurl.short(link)
 
     feed2 = feedparser.parse(rss_striped_link) #parse the feed from the individual link selected
     content = feed2.entries[0].content[0].value #extract content for first entry
@@ -31,6 +35,6 @@ def get_conspiracy_post():
     # Format the results as a string with bold formatting
     formatted_title = f"**Title:** {title}"
     formatted_description = f"**Description:** {content_text}"
-    formatted_link = f"**Link:** {link}"
+    formatted_link = f"**Link:** {short_url}"
 
     return f"{formatted_title}\n{formatted_description}\n{formatted_link}"
