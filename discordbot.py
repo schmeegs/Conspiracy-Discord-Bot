@@ -19,7 +19,7 @@ async def post_conspiracy():
         channel = discord.utils.get(client.get_all_channels(), id=CHANNEL_ID) 
         conspiracy_post = get_conspiracy_post()
         await channel.send(conspiracy_post)
-        await asyncio.sleep(60)  # Delay execution for 1 minute
+        await asyncio.sleep(86400)  # Delay execution for 1 minute
 
 @client.event
 async def on_ready():
