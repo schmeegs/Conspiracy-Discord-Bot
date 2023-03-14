@@ -28,4 +28,9 @@ def get_conspiracy_post():
         content_text = "N/A (probably because there was only an image)"
 
     # Return the results
-    return f"Title: {title}\nDescription: {content_text}\nLink: {link}"
+    # Format the results as a string with bold formatting
+    formatted_title = f"**Title:** {title}"
+    formatted_description = f"**Description:** {content_text}"
+    formatted_link = f"**Link:** {link}"
+
+    return f"{formatted_title}\n{formatted_description}\n{formatted_link}"
