@@ -1,1 +1,1 @@
-CHANNEL_ID = 608549540018126900 #Your Channel ID here, to get this right click the text channel and click 'copy'
+CHANNEL_ID = 1084770366532112435 #Your Channel ID here, to get this right click the text channel and click 'copy'
