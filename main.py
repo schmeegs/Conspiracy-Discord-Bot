@@ -24,7 +24,7 @@ if p_tags:
     first_p_tag = p_tags[0]
     content_text = first_p_tag.get_text()
 else:
-    print("N/A (probably because there was only an image)")
+    content_text = "N/A (probably because there was only an image)"
 
 # Print the results
 print("Title:", title)
