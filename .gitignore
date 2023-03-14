@@ -11,4 +11,4 @@ __pycache__/
 
 # Ignore sensitive configuration files
 config.ini
-secrets.py
+secrets_1.py
