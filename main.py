@@ -9,12 +9,23 @@ def get_conspiracy_post():
     feed = feedparser.parse(rss_url)
 
     # Get a random post from the feed
-    post = random.choice(feed.entries)
+    post = random.choice(feed.entries)    
 
     # Extract the title and link from the post
     title = post.title
-    link = post.link
 
+    # Get a list of URLs of posts made before
+    with open("posted_urls.txt", "r") as f:
+        posted_urls = f.read().splitlines()
+
+    # Find a new post that hasn't been made before
+    for post in feed.entries:
+        link = post.link
+        if link not in posted_urls:
+            break
+    else: # If all posts have been made before, return a message saying so
+        return "Cant find any new conspiracies boiz, check back tomorrow ;)"
+    
     rss_striped_link = link[:-1] + ".rss"
 
     s = pyshorteners.Shortener()
@@ -25,11 +36,15 @@ def get_conspiracy_post():
 
     soup = BeautifulSoup(content, "html.parser")
     p_tags = soup.find_all("p")
+
     if p_tags:
         first_p_tag = p_tags[0]
         content_text = first_p_tag.get_text()
     else:
         content_text = "N/A (probably because there was only an image)"
+
+    with open("posted_urls.txt", "a") as f:
+        f.write(link + "\n")
 
     # Return the results
     # Format the results as a string with bold formatting
