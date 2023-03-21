@@ -1,15 +1,18 @@
 import discord
 import subprocess
 import asyncio
-from secrets_1 import DISCORD_API_KEY
+import os
 from my_channel_id import CHANNEL_ID
 from main import get_conspiracy_post
+from dotenv import load_dotenv
+load_dotenv()
 
 intents = discord.Intents.default()
 intents.members = True
 intents.presences = True
 intents.message_content = True
 client = discord.Client(intents=intents)
+token = os.getenv('DISCORD_API_KEY')
 
 prefix = "!"
 
@@ -19,7 +22,7 @@ async def post_conspiracy():
         channel = discord.utils.get(client.get_all_channels(), id=CHANNEL_ID) 
         conspiracy_post = get_conspiracy_post()
         await channel.send(conspiracy_post)
-        await asyncio.sleep(86400)  # Delay execution for 1 minute
+        await asyncio.sleep(86400)  # Delay execution for 1 day
 
 @client.event
 async def on_ready():
@@ -28,10 +31,10 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    print('Message received:', message.content) # Add this line to check if messages are being received by the bot
+    #print('Message received:', message.content) # Add this line to check if messages are being received by the bot
 
     if message.content.lower().startswith(prefix + 'conspiracy'): # Use the prefix variable here
         conspiracy_post = get_conspiracy_post()
         await message.channel.send(conspiracy_post)
 
-client.run(DISCORD_API_KEY)
+client.run(token)

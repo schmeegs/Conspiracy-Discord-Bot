@@ -41,7 +41,7 @@ def get_conspiracy_post():
         first_p_tag = p_tags[0]
         content_text = first_p_tag.get_text()
     else:
-        content_text = "N/A (probably because there was only an image)"
+        content_text = "N/A"
 
     with open("posted_urls.txt", "a") as f:
         f.write(link + "\n")

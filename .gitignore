@@ -9,6 +9,7 @@ build/
 dist/
 __pycache__/
 
+.env
+
 # Ignore sensitive configuration files
 config.ini
-secrets_1.py
